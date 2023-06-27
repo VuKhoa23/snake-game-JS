@@ -146,3 +146,9 @@ function clearBoard() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, boardHeight, boardWidth);
 }
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
