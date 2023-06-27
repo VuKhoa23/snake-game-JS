@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Snake Game</title>
+  <style>
+    #gameBoard {
+      border: 2px solid black;
+    }
+    
+    #gameContainer {
+      text-align: center;
+    }
+    
+    #rsButton {
+      font-family: Arial;
+      font-size: 30px;
+      border-radius: 5px;
+      display: block;
+      margin: auto;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    #scoreField {
+      border: 2px solid black;
+      width: 150px;
+      font-family: Arial;
+      font-size: 30px;
+      border-radius: 5px;
+      margin: auto;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Snake Game</h1>
+  <div id="gameContainer">
+    <canvas width="600" height="600" id="gameBoard"></canvas>
+    <div id="scoreField">Score: 0</div>
+    <button id="rsButton">Restart</button>
+  </div>
+  <script src="snake.js"></script>
+</body>
+
+</html>

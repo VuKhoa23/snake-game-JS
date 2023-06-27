@@ -1,0 +1,108 @@
+const canvas = document.querySelector('#gameBoard');
+const scoreField = document.querySelector('#scoreField');
+let ctx = canvas.getContext('2d');
+
+const boardWidth = canvas.width;
+const boardHeight = canvas.height;
+const pixel = 30;
+let score = 0;
+let foodX;
+let foodY;
+DirectionX = pixel;
+DirectionY = 0;
+
+let snake = [
+    { x: 4 * pixel, y: 0 },
+    { x: 3 * pixel, y: 0 },
+    { x: 2 * pixel, y: 0 },
+    { x: 1 * pixel, y: 0 },
+    { x: 0, y: 0 },
+
+];
+
+startGame();
+spawnFood();
+
+window.addEventListener('keydown', (event) => {
+    changeDirection(event);
+});
+
+function spawnFood() {
+    foodX = Math.floor((Math.random() * (boardHeight - 0)) / pixel) * pixel;
+    foodY = Math.floor((Math.random() * (boardHeight - 0)) / pixel) * pixel;
+}
+
+function drawFood() {
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(foodX + (pixel / 2), foodY + (pixel / 2), pixel / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+    ctx.stroke();
+}
+
+function startGame() {
+    setInterval(() => {
+        clearBoard();
+        drawFood();
+        moveSnake();
+        drawSnake();
+    }, 100);
+}
+
+function moveSnake() {
+    const head = {
+        x: snake[0].x + DirectionX,
+        y: snake[0].y + DirectionY
+    };
+    if (head.x === foodX && head.y === foodY) {
+        const newHead = {
+            x: head.x + DirectionX,
+            y: head.y + DirectionY
+        };
+        snake.unshift(newHead, head);
+        spawnFood();
+        score++;
+        scoreField.textContent = 'Score: ' + score;
+    } else {
+        snake.unshift(head);
+    }
+    snake.pop();
+}
+
+
+function changeDirection(event) {
+    let moveUp = DirectionX === 0 && DirectionY === -pixel;
+    let moveDown = DirectionX === 0 && DirectionY === pixel;
+    let moveLeft = DirectionX === -pixel && DirectionY === 0;
+    let moveRight = DirectionX === pixel && DirectionY === 0;
+    if (event.key === 's' && !moveUp) {
+        DirectionX = 0;
+        DirectionY = pixel;
+    } else
+    if (event.key === 'w' && !moveDown) {
+        DirectionX = 0;
+        DirectionY = -pixel;
+    } else if (event.key === 'a' && !moveRight) {
+        DirectionX = -pixel;
+        DirectionY = 0;
+    } else if (event.key === 'd' && !moveLeft) {
+        DirectionX = pixel;
+        DirectionY = 0;
+    }
+}
+
+
+function drawSnake() {
+    snake.forEach((part) => {
+        ctx.fillStyle = 'black';
+        ctx.fillRect(part.x, part.y, pixel, pixel);
+        ctx.fillStyle = 'green';
+        ctx.fillRect(part.x, part.y, pixel - 1, pixel - 1);
+    });
+}
+
+function clearBoard() {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, boardHeight, boardWidth);
+}
