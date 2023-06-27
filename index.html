@@ -34,6 +34,24 @@
       margin-top: 10px;
       font-weight: bold;
     }
+    
+    #buttonContainer {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      width: 100%;
+      height: 300px;
+      margin: auto;
+      margin-top: 20px;
+    }
+    
+    #innerButtonContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .innerButton {
+      flex: 1;
+    }
   </style>
 </head>
 
@@ -42,6 +60,14 @@
     <canvas width="600" height="600" id="gameBoard"></canvas>
     <div id="scoreField">Score: 0</div>
     <button id="rsButton">Restart</button>
+  </div>
+  <div id="buttonContainer">
+    <button id="leftButton">Left</button>
+    <div id="innerButtonContainer">
+      <button class="innerButton" id="upButton">Up</button>
+      <button class="innerButton" id="downButton">Down</button>
+    </div>
+    <button id="rightButton">Right</button>
   </div>
   <script src="snake.js"></script>
 </body>

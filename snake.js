@@ -1,5 +1,9 @@
 const canvas = document.querySelector('#gameBoard');
 const scoreField = document.querySelector('#scoreField');
+const leftButton = document.querySelector('#leftButton');
+const rightButton = document.querySelector('#rightButton');
+const upButton = document.querySelector('#upButton');
+const downButton = document.querySelector('#downButton');
 let ctx = canvas.getContext('2d');
 
 const boardWidth = canvas.width;
@@ -26,6 +30,22 @@ spawnFood();
 window.addEventListener('keydown', (event) => {
     changeDirection(event);
 });
+
+downButton.addEventListener('click', () => {
+    changeDirectionOnButton('down');
+})
+
+upButton.addEventListener('click', () => {
+    changeDirectionOnButton('up');
+})
+
+leftButton.addEventListener('click', () => {
+    changeDirectionOnButton('left');
+})
+
+rightButton.addEventListener('click', () => {
+    changeDirectionOnButton('right');
+})
 
 function spawnFood() {
     foodX = Math.floor((Math.random() * (boardHeight - 0)) / pixel) * pixel;
@@ -92,6 +112,26 @@ function changeDirection(event) {
     }
 }
 
+function changeDirectionOnButton(move) {
+    let moveUp = DirectionX === 0 && DirectionY === -pixel;
+    let moveDown = DirectionX === 0 && DirectionY === pixel;
+    let moveLeft = DirectionX === -pixel && DirectionY === 0;
+    let moveRight = DirectionX === pixel && DirectionY === 0;
+    if (move === 'down' && !moveUp) {
+        DirectionX = 0;
+        DirectionY = pixel;
+    } else
+    if (move === 'up' && !moveDown) {
+        DirectionX = 0;
+        DirectionY = -pixel;
+    } else if (move === 'left' && !moveRight) {
+        DirectionX = -pixel;
+        DirectionY = 0;
+    } else if (move === 'right' && !moveLeft) {
+        DirectionX = pixel;
+        DirectionY = 0;
+    }
+}
 
 function drawSnake() {
     snake.forEach((part) => {
