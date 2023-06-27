@@ -96,17 +96,17 @@ function changeDirection(event) {
     let moveDown = DirectionX === 0 && DirectionY === pixel;
     let moveLeft = DirectionX === -pixel && DirectionY === 0;
     let moveRight = DirectionX === pixel && DirectionY === 0;
-    if (event.key === 's' && !moveUp) {
+    if (event.key.toLowerCase() === 's' && !moveUp) {
         DirectionX = 0;
         DirectionY = pixel;
     } else
-    if (event.key === 'w' && !moveDown) {
+    if (event.key.toLowerCase() === 'w' && !moveDown) {
         DirectionX = 0;
         DirectionY = -pixel;
-    } else if (event.key === 'a' && !moveRight) {
+    } else if (event.key.toLowerCase() === 'a' && !moveRight) {
         DirectionX = -pixel;
         DirectionY = 0;
-    } else if (event.key === 'd' && !moveLeft) {
+    } else if (event.key.toLowerCase() === 'd' && !moveLeft) {
         DirectionX = pixel;
         DirectionY = 0;
     }
